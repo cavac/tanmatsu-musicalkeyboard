@@ -166,3 +166,16 @@ install:
 .PHONY: run
 run:
 	cd badgelink/tools; ./badgelink.sh start application
+
+.PHONY: prepare_rgb888
+prepare_rgb888:
+	mkdir components
+	cd components
+	git clone git@github.com:cavac/esp32-component-mipi-dsi-abstraction.git
+	git clone git@github.com:cavac/pax-graphics.git
+	cd pax-graphics
+	git submodule update --init --recursive
+	cd ../..
+	rm -rf managed_components/managed_components/robotman2412__pax-gfx
+	rm -rf managed_components/nicolaielectronics__mipi_dsi_abstraction
+	rm -rf build
